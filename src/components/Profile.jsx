@@ -13,6 +13,7 @@ const Profile = () => {
                 <div>
                     new post
                 </div>
+
                 <div>
                     post 1
                 </div>
