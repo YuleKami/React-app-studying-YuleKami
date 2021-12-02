@@ -20,6 +20,10 @@
     padding: 10px;
 }
 
+.enterMessages {
+    padding: 10px;
+}
+
 .messages .message {
     color: white;
 }
