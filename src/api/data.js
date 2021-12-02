@@ -1,4 +1,4 @@
-export const state = {
+export let state = {
     profilePage: {
         posts: [
             {id: '1', message: 'Hi, how are you?', likecounts: 10,},
@@ -25,5 +25,12 @@ export const state = {
             {id: '6', name: 'Gremna'},
         ],
     },
-
+}
+export let addPost = (newPostElement) => {
+    let newPost = {
+        id: 5,
+        message: newPostElement,
+        likecounts: 0,
+    };
+    state.profilePage.posts.push(newPost);
 }
