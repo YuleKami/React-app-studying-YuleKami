@@ -2,18 +2,20 @@ import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import React from "react";
+import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../api/data";
 
 const Dialogs = (props) => {
 
     let dialogsElements = props.dialogPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
     let messagesElements = props.dialogPage.messages.map(m => <Message message={m.message}/>);
-    let newMessageElement = React.createRef()
     let addMessage = () => {
-        props.dispatch({type: 'ADD-MESSAGE'});
+        let action = addMessageActionCreator()
+        props.dispatch(action);
     }
-    let onDialogChange = () => {
-        let text = newMessageElement.current.value;
-        props.dispatch({type: 'UPDATE-NEW-MESSAGE-TEXT', newText: text});
+    let onDialogChange = (e) => {
+        let text = e.target.value;
+        let action = updateNewMessageTextActionCreator(text)
+        props.dispatch(action);
     }
     return (
         <div className={s.dialogs}>
@@ -21,11 +23,17 @@ const Dialogs = (props) => {
                 {dialogsElements}
             </div>
             <div className={s.messages}>
-                {messagesElements}
-            </div>
-            <div className={s.enterMessages}>
-                <textarea onChange={onDialogChange} ref={newMessageElement} value={props.dialogPage.newMessageText}/>
-                <button onClick={addMessage}>Send message</button>
+                <div>{messagesElements}</div>
+                <div className={s.enterMessages}>
+                    <div>
+                        <textarea onChange={onDialogChange}
+                                  value={props.dialogPage.newMessageText}
+                                  placeholder='Enter your message'/>
+                    </div>
+                    <div>
+                        <button onClick={addMessage}>Send message</button>
+                    </div>
+                </div>
             </div>
         </div>
     );
