@@ -1,6 +1,7 @@
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 import React from "react";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../api/data";
 
 const MyPosts = (props) => {
     let postsElements = props.posts.map(p => <Post likecounts={p.likecounts} message={p.message}/>);
@@ -8,12 +9,13 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef()
 
     let addPost = () => {
-        props.addPost();
+        props.dispatch(addPostActionCreator());
     }
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+        let action = updateNewPostTextActionCreator(text)
+        props.dispatch(action)
     }
 
     return (
