@@ -1,7 +1,7 @@
 import s from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {updateNewPostText} from "../../api/data";
+import {updateNewPostText} from "../../api/store";
 
 const Profile = (props) => {
     return (
